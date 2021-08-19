@@ -1,0 +1,66 @@
+@import "../../assets/stylesheets/styles/functions";
+@import "../../assets/stylesheets/styles/variables";
+@import "../../assets/stylesheets/mixins/mixins";
+header {
+  background-color: rgba($black, 0.5);
+  padding: 5px 20px;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  .header {
+    @include flexbox;
+    .logo {
+      img {
+        max-height: 30px;
+        max-width: 150px;
+      }
+    }
+    .search-container {
+      position: relative;
+      width: 300px;
+      padding: 5px 5px 5px 50px;
+      .form-control {
+        padding: 3px 40px 3px 10px;
+      }
+      .search-btn {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        color: rgba($white, 0.5);
+      }
+    }
+    .header-right {
+      @include flexbox;
+      margin-left: auto;
+      .header-notification {
+        background-color: $gray-600;
+        @include border-radius(20px);
+        height: 30px;
+        padding: 8px 12px 0;
+        margin: 5px 10px;
+        color: $gray-200;
+        &:before {
+          padding-right: 5px;
+          color: rgba($gray-200, 0.5);
+        }
+      }
+      .header-profile {
+        img {
+          border-radius: 50%;
+          background-color: $white;
+          max-height: 30px;
+          vertical-align: middle;
+          margin: 5px 10px;
+        }
+        span {
+          font-weight: 600;
+          cursor: pointer;
+          .fa {
+            padding-left: 5px;
+            vertical-align: -1px;
+          }
+        }
+      }
+    }
+  }
+}
