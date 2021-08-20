@@ -25,7 +25,11 @@ const Header = () => {
         <div className="header-right">
           <div className="header-notification fa fa-bell">05</div>
           <div className="header-profile">
-            <img src={profileImg} alt="Mohamed Noohu" />
+            {false ? (
+              <em className="fa fa-user-circle"></em>
+            ) : (
+              <img src={profileImg} alt="Mohamed Noohu" />
+            )}
             <span role="button">
               Mohamed Noohu <em className="fa fa-chevron-down"></em>
             </span>

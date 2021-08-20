@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import EventProvider from "./hooks/useEventProvider";
+import { EventProvider } from "./hooks";
 import App from "./App";
 
 import "./assets/stylesheets/main.scss";

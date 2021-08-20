@@ -7,7 +7,7 @@
   font-family: $btn-font-family;
   font-weight: $btn-font-weight;
   line-height: $btn-line-height;
-  color: $white;
+  color: rgba($white, 0.8);
   text-align: center;
   text-decoration: if($link-decoration == none, null, none);
   white-space: $btn-white-space;
@@ -25,7 +25,7 @@
   @include transition($btn-transition);
 
   &:hover {
-    color: $body-color;
+    color: $white;
     text-decoration: if($link-hover-decoration == underline, none, null);
   }
 
