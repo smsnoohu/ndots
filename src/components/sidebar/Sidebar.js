@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 import { useEventState } from "../../hooks";
 
@@ -7,14 +7,32 @@ import EditorWrapper from "../editors";
 import "./sidebar.scss";
 
 const Sidebar = () => {
+  const editorWrapperRef = useRef(null);
   const { eventState, eventActions } = useEventState();
   const {
     isEditorOpen: { open },
     editorType: type,
   } = eventState;
-  const { openEditor } = eventActions;
+  const { toggleEditor, closeEditor } = eventActions;
+
+  const handleClickOutside = (event) => {
+    if (
+      editorWrapperRef.current &&
+      !editorWrapperRef.current.contains(event.target)
+    ) {
+      closeEditor();
+    }
+  };
+
+  // below is the same as componentDidMount and componentDidUnmount
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside, false);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, false);
+    };
+  }, []);
   return (
-    <aside>
+    <aside ref={editorWrapperRef}>
       <nav className="sidebar">
         <ul>
           <li>
@@ -25,15 +43,16 @@ const Sidebar = () => {
               }`}
               aria-label="Add New Document"
               title="Add New Document"
-              onClick={(e) => openEditor(e, "dots", "123")}
+              onClick={(e) => toggleEditor(e, "dots", "123")}
             ></a>
           </li>
           <li>
             <a
               href="#"
-              className="fa fa-home"
-              aria-label="Home"
-              title="Home"
+              className={`fa fa-bars ${type === "explore" ? "active" : ""}`}
+              aria-label="Explore"
+              title="Explore"
+              onClick={(e) => toggleEditor(e, "explore", "123")}
             ></a>
           </li>
           <li>
@@ -42,7 +61,7 @@ const Sidebar = () => {
               className={`fa fa-file-alt ${type === "notes" ? "active" : ""}`}
               aria-label="Notes"
               title="Notes"
-              onClick={(e) => openEditor(e, "notes", "123")}
+              onClick={(e) => toggleEditor(e, "notes", "123")}
             ></a>
           </li>
           <li>
@@ -51,7 +70,7 @@ const Sidebar = () => {
               className={`fa fa-link ${type === "links" ? "active" : ""}`}
               aria-label="Links"
               title="Link"
-              onClick={(e) => openEditor(e, "links", "123")}
+              onClick={(e) => toggleEditor(e, "links", "123")}
             ></a>
           </li>
           <li>
@@ -62,7 +81,7 @@ const Sidebar = () => {
               }`}
               aria-label="Comments"
               title="Comments"
-              onClick={(e) => openEditor(e, "comments", "123")}
+              onClick={(e) => toggleEditor(e, "comments", "123")}
             ></a>
           </li>
         </ul>

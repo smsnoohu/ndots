@@ -4,16 +4,16 @@ import "./editor.scss";
 import { useEventState } from "../../hooks";
 
 import Notes from "./notes";
+import Comments from "./comments";
 
 const EditorWrapper = (props) => {
   const { eventState, eventActions } = useEventState();
   const {
     isEditorOpen: { open, openClass },
     editorType: type,
+    isEditorExpand,
   } = eventState;
-  const { closeEditor } = eventActions;
-
-  console.log("type: ", type);
+  const { expandCollapse, closeEditor, setEditorRef } = eventActions;
 
   const title =
     type === "notes"
@@ -24,17 +24,25 @@ const EditorWrapper = (props) => {
       ? "Add Links"
       : type === "comments"
       ? "Comments"
+      : type === "explore"
+      ? "Explore"
       : "";
 
   return (
     <>
       {open && (
-        <div className={`editor-wrapper ${openClass ? "open" : ""}`}>
+        <div
+          className={`editor-wrapper ${openClass ? "open" : ""} ${
+            isEditorExpand ? "expand" : ""
+          }`}
+        >
           <div className="editor-header">
             <div className="editor-close-btn-container">
               <button
-                className="btn btn-close fa fa-expand"
-                onClick={closeEditor}
+                className={`btn btn-close fa ${
+                  isEditorExpand ? "fa-compress" : "fa-expand"
+                }`}
+                onClick={expandCollapse}
               ></button>
               <button
                 className="btn btn-close fa fa-times"
@@ -43,7 +51,8 @@ const EditorWrapper = (props) => {
             </div>
             {title && <h2>{title}</h2>}
           </div>
-          <Notes />
+          {type === "notes" && <Notes />}
+          {type === "comments" && <Comments />}
         </div>
       )}
     </>

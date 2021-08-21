@@ -1,7 +1,8 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 const ACTION_TYPES = {
   UPDATE_STATE: "update_state",
+  TOGGLE_EDITOR: "toggle_editor",
   OPEN_EDITOR: "open_editor",
   CLOSE_EDITOR: "close_editor",
   EDITOR_EXPAND: "editor_expand",
@@ -29,6 +30,17 @@ function eventReducer(state, action) {
         ...state,
         [action.payload.type]: [action.payload.value],
       };
+    case ACTION_TYPES.TOGGLE_EDITOR:
+      return {
+        ...state,
+        isEditorOpen: {
+          open: action.payload.open,
+          openClass: action.payload.openClass,
+        },
+        editorType: action.payload.type,
+        selectedDot: action.payload.item,
+        isEditorExpand: false,
+      };
     case ACTION_TYPES.OPEN_EDITOR:
       return {
         ...state,
@@ -48,7 +60,7 @@ function eventReducer(state, action) {
     case ACTION_TYPES.EDITOR_EXPAND:
       return {
         ...state,
-        isEditorExpand: action.payload,
+        isEditorExpand: !state.isEditorExpand,
       };
     case ACTION_TYPES.SET_EDITOR_TYPE:
       return {
@@ -65,6 +77,7 @@ function eventReducer(state, action) {
         `Unknown action type received.
                     Valid action types are:
                         * UPDATE_STATE
+                        * TOGGLE_EDITOR
                         * OPEN_EDITOR
                         * CLOSE_EDITOR
                         * EDITOR_EXPAND
@@ -78,6 +91,25 @@ function eventReducer(state, action) {
 function EventProvider(props) {
   const [state, dispatch] = useReducer(eventReducer, initialState);
 
+  const {
+    isEditorOpen: { open, openClass },
+    editorType,
+    selectedDot,
+  } = state;
+
+  const toggleEditor = (e, type, item) => {
+    e.preventDefault();
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_EDITOR,
+      payload: {
+        open: type !== editorType ? true : !open,
+        openClass: type !== editorType ? true : !openClass,
+        type: type !== editorType ? type : "",
+        item: type !== editorType ? item : "",
+      },
+    });
+  };
+
   const openEditor = (e, type = "explore", item) => {
     e.preventDefault();
     dispatch({ type: ACTION_TYPES.OPEN_EDITOR });
@@ -90,18 +122,31 @@ function EventProvider(props) {
       type: ACTION_TYPES.CLOSE_EDITOR,
       payload: { key: "openClass" },
     });
-    setTimeout(() => {
-      dispatch({ type: ACTION_TYPES.CLOSE_EDITOR, payload: { key: "open" } });
-    }, 600);
+    // setTimeout(() => {
+    //   dispatch({
+    //     type: ACTION_TYPES.CLOSE_EDITOR,
+    //     payload: { key: "open" },
+    //   });
+    // }, 2000);
+    dispatch({
+      type: ACTION_TYPES.CLOSE_EDITOR,
+      payload: { key: "open" },
+    });
     dispatch({ type: ACTION_TYPES.SET_EDITOR_TYPE, payload: "" });
     dispatch({ type: ACTION_TYPES.SET_SELECTED_DOT, payload: "" });
+  };
+
+  const expandCollapse = () => {
+    dispatch({ type: ACTION_TYPES.EDITOR_EXPAND });
   };
 
   const value = {
     eventState: { ...state },
     eventActions: {
+      toggleEditor,
       openEditor,
       closeEditor,
+      expandCollapse,
     },
   };
 
