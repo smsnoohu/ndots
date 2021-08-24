@@ -38,12 +38,10 @@ const Sidebar = () => {
           <li>
             <a
               href="#"
-              className={`fa fa-file-medical ${
-                type === "dots" ? "active" : ""
-              }`}
-              aria-label="Add New Document"
-              title="Add New Document"
-              onClick={(e) => toggleEditor(e, "dots", "123")}
+              className={`fa fa-folder ${type === "files" ? "active" : ""}`}
+              aria-label="Manage files"
+              title="Manage files"
+              onClick={(e) => toggleEditor(e, "files", "123")}
             ></a>
           </li>
           <li>

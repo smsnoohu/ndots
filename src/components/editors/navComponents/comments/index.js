@@ -1,7 +1,7 @@
 import React from "react";
 
-import Editor from "../Editor";
-import { useNotes } from "../../../hooks";
+import EditorInner from "../../EditorInner";
+import { useNotes } from "../../../../hooks";
 
 const Comments = (props) => {
   const { noteState, noteActions } = useNotes();
@@ -49,7 +49,7 @@ const Comments = (props) => {
     </>
   );
 
-  return <Editor body={returnBody()} footer={returnFooter()} />;
+  return <EditorInner body={returnBody()} footer={returnFooter()} />;
 };
 
 export default Comments;

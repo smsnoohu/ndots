@@ -1,14 +1,14 @@
 import React from "react";
 
-const Editor = (props) => {
+const EditorInner = (props) => {
   const { body, footer } = props;
 
   return (
     <>
       <div className="editor-body">{body}</div>
-      <div className="editor-footer">{footer}</div>
+      {footer && <div className="editor-footer">{footer}</div>}
     </>
   );
 };
 
-export default Editor;
+export default EditorInner;

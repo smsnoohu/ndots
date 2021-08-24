@@ -3,8 +3,7 @@ import React from "react";
 import "./editor.scss";
 import { useEventState } from "../../hooks";
 
-import Notes from "./notes";
-import Comments from "./comments";
+import { Comments, Files, Notes } from "./navComponents";
 
 const EditorWrapper = (props) => {
   const { eventState, eventActions } = useEventState();
@@ -13,19 +12,19 @@ const EditorWrapper = (props) => {
     editorType: type,
     isEditorExpand,
   } = eventState;
-  const { expandCollapse, closeEditor, setEditorRef } = eventActions;
+  const { expandCollapse, closeEditor } = eventActions;
 
   const title =
-    type === "notes"
+    type === "files"
+      ? "Files"
+      : type === "explore"
+      ? "Explore"
+      : type === "notes"
       ? "Notes"
-      : type === "dots"
-      ? "Dots"
       : type === "links"
       ? "Add Links"
       : type === "comments"
       ? "Comments"
-      : type === "explore"
-      ? "Explore"
       : "";
 
   return (
@@ -51,6 +50,7 @@ const EditorWrapper = (props) => {
             </div>
             {title && <h2>{title}</h2>}
           </div>
+          {type === "files" && <Files />}
           {type === "notes" && <Notes />}
           {type === "comments" && <Comments />}
         </div>

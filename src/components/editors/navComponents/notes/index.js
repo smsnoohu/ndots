@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 import { ChromePicker } from "react-color";
 
-import Editor from "../Editor";
-import { useNotes } from "../../../hooks";
+import EditorInner from "../../EditorInner";
+import { useNotes } from "../../../../hooks";
 
 const Notes = (props) => {
   const { noteState, noteActions } = useNotes();
+
+  const colorPickerWrapper = useRef(null);
 
   const { isColorPickerOpen, pickedColor, title } = noteState;
   const {
@@ -15,6 +17,22 @@ const Notes = (props) => {
     handleColorPicker,
     updateField,
   } = noteActions;
+
+  const handleOutsideClick = (event) => {
+    if (
+      colorPickerWrapper.current &&
+      !colorPickerWrapper.current.contains(event.target)
+    ) {
+      closeColorPicker();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleOutsideClick, false);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick, false);
+    };
+  }, []);
   const returnBody = () => (
     <>
       <fieldset>
@@ -47,18 +65,23 @@ const Notes = (props) => {
             aria-label="Remove Image"
           ></button>
           <button className="btn fa fa-trash" aria-label="Delete"></button>
-          <button
-            className="btn fa fa-square-full"
-            aria-label="Color Picker"
-            style={{ color: pickedColor, backgroundColor: pickedColor }}
-            onClick={toggleColorPicker}
-          ></button>
-          {isColorPickerOpen ? (
-            <div className="popover">
-              <div className="cover" onClick={closeColorPicker} />
-              <ChromePicker color={pickedColor} onChange={handleColorPicker} />
-            </div>
-          ) : null}
+          <div ref={colorPickerWrapper}>
+            <button
+              className="btn fa fa-square-full"
+              aria-label="Color Picker"
+              style={{ color: pickedColor, backgroundColor: pickedColor }}
+              onClick={toggleColorPicker}
+            ></button>
+            {isColorPickerOpen ? (
+              <div className="popover">
+                {/* <div className="cover" onClick={closeColorPicker} /> */}
+                <ChromePicker
+                  color={pickedColor}
+                  onChange={handleColorPicker}
+                />
+              </div>
+            ) : null}
+          </div>
         </div>
       </fieldset>
       <fieldset className="pt-20">
@@ -100,7 +123,7 @@ const Notes = (props) => {
     </>
   );
 
-  return <Editor body={returnBody()} footer={returnFooter()} />;
+  return <EditorInner body={returnBody()} footer={returnFooter()} />;
 };
 
 export default Notes;
