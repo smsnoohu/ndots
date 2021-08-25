@@ -1,12 +1,9 @@
-import React, { Children } from "react";
-
-import { useTab } from "../../hooks";
+import React from "react";
 
 import "./tabNav.scss";
 
 const TabNav = (props) => {
-  const { initialActiveTab, tabList, children } = props;
-  const { activeTab, tabOption, tabAction } = useTab(tabList, initialActiveTab);
+  const { tabOption, activeTab, tabAction, children } = props;
   return (
     <>
       <ul className="tab-nav">

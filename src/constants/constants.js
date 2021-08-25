@@ -1,10 +1,12 @@
 export const FILES_TAB_ID = {
   FILES_ID: "files",
-  DOTS_ID: "dots",
+  SHARED_ID: "shared",
+  BOOKMARK_ID: "bookmark",
 };
 export const FILES_TAB_NAME = {
-  FILES: "Files",
-  DOTS: "Dots",
+  FILES: "My Files",
+  SHARED: "Shared",
+  BOOKMARK: "Bookmark",
 };
 export const FILES_TAB = [
   {
@@ -13,7 +15,11 @@ export const FILES_TAB = [
     isActive: true,
   },
   {
-    id: FILES_TAB_ID.DOTS_ID,
-    name: FILES_TAB_NAME.DOTS,
+    id: FILES_TAB_ID.SHARED_ID,
+    name: FILES_TAB_NAME.SHARED,
+  },
+  {
+    id: FILES_TAB_ID.BOOKMARK_ID,
+    name: FILES_TAB_NAME.BOOKMARK,
   },
 ];

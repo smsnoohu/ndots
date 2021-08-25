@@ -1,13 +1,13 @@
 import React from "react";
 
 import EditorInner from "../../EditorInner";
-import { useNotes } from "../../../../hooks";
+// import { useNotes } from "../../../../hooks";
 
 const Comments = (props) => {
-  const { noteState, noteActions } = useNotes();
+  // const { noteState, noteActions } = useNotes();
 
-  const { title } = noteState;
-  const { updateField } = noteActions;
+  // const { title } = noteState;
+  // const { updateField } = noteActions;
   const returnBody = () => (
     <>
       <fieldset>
@@ -19,8 +19,8 @@ const Comments = (props) => {
           type="text"
           name="title"
           id="title"
-          value={title}
-          onChange={updateField}
+          // value={title}
+          // onChange={updateField}
           placeholder="Enter your dot title"
         />
       </fieldset>
@@ -32,8 +32,8 @@ const Comments = (props) => {
           className="form-control"
           name="comments"
           id="comments"
-          value={title}
-          onChange={updateField}
+          // value={title}
+          // onChange={updateField}
           placeholder="Comments..."
           cols=""
           row=""

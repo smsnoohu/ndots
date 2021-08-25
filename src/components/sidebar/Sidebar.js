@@ -56,10 +56,12 @@ const Sidebar = () => {
           <li>
             <a
               href="#"
-              className={`fa fa-file-alt ${type === "notes" ? "active" : ""}`}
-              aria-label="Notes"
-              title="Notes"
-              onClick={(e) => toggleEditor(e, "notes", "123")}
+              className={`fa fa-dot-circle ${
+                type === "dotInfo" ? "active" : ""
+              }`}
+              aria-label="Docuemnt Info"
+              title="Docuemnt Info"
+              onClick={(e) => toggleEditor(e, "dotInfo", "123")}
             ></a>
           </li>
           <li>

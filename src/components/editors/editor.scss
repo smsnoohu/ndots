@@ -87,3 +87,15 @@
     }
   }
 }
+
+.hide-on-collapse {
+  display: none !important;
+}
+.expand {
+  th,
+  td {
+    &.hide-on-collapse {
+      display: table-cell !important;
+    }
+  }
+}

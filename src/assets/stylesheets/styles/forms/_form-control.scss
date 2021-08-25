@@ -229,3 +229,39 @@ textarea {
     @include border-radius($input-border-radius);
   }
 }
+.custom-check {
+  input {
+    position: absolute;
+    opacity: 0;
+    + label {
+      position: relative;
+      padding-left: 28px;
+      cursor: pointer;
+      display: inline-block;
+      &:before {
+        position: absolute;
+        content: "";
+        width: 18px;
+        height: 18px;
+        background-color: rgba($gray-600, 0.7);
+        border: solid 1px $gray-400;
+        left: 0;
+      }
+    }
+    &:checked {
+      + label {
+        &:after {
+          position: absolute;
+          content: "";
+          width: 12px;
+          height: 6px;
+          border-left: solid 2px $gray-100;
+          border-bottom: solid 2px $gray-100;
+          left: 3px;
+          top: 4px;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}

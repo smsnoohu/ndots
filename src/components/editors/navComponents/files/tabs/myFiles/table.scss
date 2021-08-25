@@ -1,0 +1,74 @@
+@import "../../../../../../assets/stylesheets/styles/functions";
+@import "../../../../../../assets/stylesheets/styles/variables";
+
+.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  tr {
+    th,
+    td {
+      padding: 0.5rem 0.75rem;
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      vertical-align: bottom;
+      background-color: rgba($gray-300, 0.5);
+      color: $white;
+      font-weight: 600;
+    }
+    @at-root {
+      &:nth-child(even) {
+        td {
+          background-color: rgba($gray-600, 0.5);
+        }
+      }
+    }
+  }
+  tfoot {
+    tr {
+      td {
+        background-color: rgba($gray-700, 0.5);
+        color: $white;
+        font-weight: 100;
+        font-size: 1.2rem;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.sort-table {
+  tr {
+    th:not(.no-sort) {
+      position: relative;
+      cursor: pointer;
+      &:before,
+      &:after {
+        position: absolute;
+        content: "";
+        border-left: solid 5px transparent;
+        border-right: solid 5px transparent;
+        border-bottom: solid 5px $gray-800;
+        top: 9px;
+        right: 10px;
+      }
+      &:after {
+        border-bottom-width: 0;
+        border-top: solid 5px $gray-800;
+        top: 17px;
+      }
+      &.asc {
+        &:before {
+          border-bottom-color: $gray-100;
+        }
+      }
+      &.desc {
+        &:after {
+          border-top-color: $gray-100;
+        }
+      }
+    }
+  }
+}

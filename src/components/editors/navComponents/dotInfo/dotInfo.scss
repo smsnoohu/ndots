@@ -1,0 +1,111 @@
+@import "../../../../assets/stylesheets/styles/functions";
+@import "../../../../assets/stylesheets/styles/variables";
+@import "../../../../assets/stylesheets/mixins/mixins";
+
+.dot-info-container {
+  @include flexbox;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  fieldset {
+    &.additional-info {
+      @include flexbox;
+      flex-direction: column;
+      flex: 1;
+      textarea {
+        flex: 1;
+      }
+    }
+  }
+  .suggesions-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+.suggestion-container {
+  position: fixed;
+  left: 430px;
+  top: 50px;
+  bottom: 0;
+  width: 300px;
+  overflow: auto;
+  background-color: $gray-700;
+  padding: 10px 20px;
+  transition: ease-in-out all 0.5s;
+  .suggestion-list {
+    list-style: none;
+    li {
+      border: solid 1px $gray-500;
+      @include border-radius(5px);
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      img {
+        max-width: 100px;
+        float: left;
+        margin: 0 10px 5px 0;
+        border: solid 1px $gray-500;
+        @include border-radius(5px);
+        padding: 5px;
+      }
+      h4 {
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+.expand .suggestion-container {
+  left: 690px;
+}
+.bootkmark-wrapper {
+  position: relative;
+  .bookmark-container {
+    position: absolute;
+    background-color: $gray-700;
+    width: 250px;
+    padding: 10px;
+    border: solid 1px $gray-600;
+    @include border-radius(5px);
+    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.2);
+    top: -10px;
+    left: 50px;
+    z-index: 2;
+    h4 {
+      padding-bottom: 10px;
+    }
+    .fa {
+      font-size: 1.2rem;
+    }
+    &:before,
+    &:after {
+      position: absolute;
+      content: "";
+      border-top: solid 10px transparent;
+      border-bottom: solid 10px transparent;
+      border-right: solid 10px $gray-600;
+      left: -10px;
+      top: 20px;
+    }
+    &:after {
+      border-top-width: 9px;
+      border-bottom-width: 9px;
+      border-right-width: 9px;
+      border-right-color: $gray-700;
+      left: -9px;
+    }
+    .bookmark-list {
+      list-style: none;
+      padding-top: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      li {
+        padding: 5px;
+      }
+    }
+  }
+}
