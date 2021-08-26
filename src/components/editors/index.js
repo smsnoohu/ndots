@@ -4,6 +4,7 @@ import "./editor.scss";
 import { useEventState } from "../../hooks";
 
 import { Comments, Files, DotInfo } from "./navComponents";
+import { Button } from "../";
 
 const EditorWrapper = (props) => {
   const { eventState, eventActions } = useEventState();
@@ -37,16 +38,12 @@ const EditorWrapper = (props) => {
         >
           <div className="editor-header">
             <div className="editor-close-btn-container">
-              <button
-                className={`btn btn-close fa ${
-                  isEditorExpand ? "fa-compress" : "fa-expand"
-                }`}
-                onClick={expandCollapse}
-              ></button>
-              <button
-                className="btn btn-close fa fa-times"
-                onClick={closeEditor}
-              ></button>
+              <Button
+                king="close"
+                icon={isEditorExpand ? "compress" : "expand"}
+                handleClick={expandCollapse}
+              />
+              <Button kind="close" icon="times" handleClick={closeEditor} />
             </div>
             {title && <h2>{title}</h2>}
           </div>

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Inputbox, Button } from "../";
 import "./header.scss";
 import logo from "../../assets/images/logo.png";
 import profileImg from "../../assets/images/profile.png";
@@ -12,15 +13,13 @@ const Header = () => {
           <img src={logo} alt="nDots.io" />
         </div>
         <form className="search-container">
-          <input
-            type="text"
+          <Inputbox
             name="search"
             id="search"
-            className="form-control"
             autoComplete="off"
             placeholder="Search Dots..."
           />
-          <button type="submit" className="btn search-btn fa fa-search" />
+          <Button type="submit" className="search-btn" icon="search" />
         </form>
         <div className="header-right">
           <div className="header-notification fa fa-bell">05</div>

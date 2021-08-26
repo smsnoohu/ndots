@@ -4,6 +4,7 @@ import { ChromePicker } from "react-color";
 
 import EditorInner from "../../EditorInner";
 import { useDotInfo } from "../../../../hooks";
+import { Label, Inputbox, Textarea, Checkbox, Button } from "../../../";
 import "./dotInfo.scss";
 import suggetionImg from "../../../../assets/images/logo.png";
 
@@ -80,44 +81,35 @@ const DotInfo = (props) => {
   const returnBody = () => (
     <div className="dot-info-container" ref={suggesionsWrapper}>
       <fieldset>
-        <label htmlFor="dotName" className="form-label">
-          Dot Name
-        </label>
-        <input
-          className="form-control"
-          type="text"
+        <Label htmlFor="dotName" value="Dot Name" />
+        <Inputbox
           name="dotName"
           id="dotName"
           value={dotName}
-          onChange={updateField}
+          handleChange={updateField}
           placeholder="Maximum 3 words"
         />
       </fieldset>
       <fieldset className="pt-20">
-        <label className="form-label label-block">Actions</label>
+        <Label className="label-block" value="Actions" />
         <div className="btn-group editor-btn-group">
           <div className="bootkmark-wrapper" ref={bookmarkWrapper}>
-            <button
-              className="btn fa fa-star"
-              aria-label="Star"
-              onClick={toggleBookmark}
-            ></button>
+            <Button icon="star" title="Star" handleClick={toggleBookmark} />
             {isBookmarkOpen && (
               <div className="bookmark-container">
                 <h4>Select Tag</h4>
                 <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control"
+                  <Inputbox
                     name="bookmark"
                     value={bookmark}
-                    onChange={updateField}
+                    handleChange={updateField}
                     autoComplete="off"
                   />
-                  <button
-                    type="button"
-                    className="btn btn-primary btn-sm fa fa-plus"
-                    onClick={addBookmarkList}
+                  <Button
+                    kind="primary"
+                    className="btn-sm"
+                    icon="plus"
+                    handleClick={addBookmarkList}
                     disabled={!bookmark}
                   />
                 </div>
@@ -125,38 +117,31 @@ const DotInfo = (props) => {
                   {bookmarkList &&
                     bookmarkList.length &&
                     bookmarkList.map((item) => (
-                      <li className="custom-check" key={item.id}>
-                        <input
-                          type="checkbox"
+                      <li key={item.id}>
+                        <Checkbox
                           name={item.id}
                           id={item.id}
                           checked={item.isSelected}
-                          onChange={updateBookmark}
+                          handleChange={updateBookmark}
+                          label={item.name}
                         />
-                        <label htmlFor={item.id}>{item.name}</label>
                       </li>
                     ))}
                 </ul>
               </div>
             )}
           </div>
-          <button className="btn fa fa-clone" aria-label="Clone"></button>
-          <button
-            className="btn fa fa2 fa-add-image"
-            aria-label="Add Image"
-          ></button>
-          <button
-            className="btn fa fa2 fa-remove-image"
-            aria-label="Remove Image"
-          ></button>
-          <button className="btn fa fa-trash" aria-label="Delete"></button>
+          <Button icon="clone" title="Clone" />
+          <Button className="fa2" icon="add-image" title="Add Image" />
+          <Button className="fa2" icon="remove-image" title="Remove Image" />
+          <Button icon="trash" title="Delete" />
           <div ref={colorPickerWrapper}>
-            <button
-              className="btn fa fa-square-full"
-              aria-label="Color Picker"
+            <Button
+              icon="square-full"
+              title="Color Picker"
               style={{ color: pickedColor, backgroundColor: pickedColor }}
-              onClick={toggleColorPicker}
-            ></button>
+              handleClick={toggleColorPicker}
+            />
             {isColorPickerOpen ? (
               <div className="popover">
                 <ChromePicker
@@ -169,40 +154,32 @@ const DotInfo = (props) => {
         </div>
       </fieldset>
       <fieldset className="pt-20">
-        <label htmlFor="link" className="form-label">
-          Link
-        </label>
-        <input
-          className="form-control"
+        <Label htmlFor="link" value="Link" />
+        <Inputbox
           type="url"
           name="link"
           id="link"
           value={link}
-          onChange={updateField}
+          handleChange={updateField}
           placeholder="http://"
         />
       </fieldset>
       <fieldset className="pt-20 additional-info">
-        <label htmlFor="info" className="form-label">
-          Additional Information
-        </label>
-        <textarea
-          className="form-control"
+        <Label htmlFor="info" value="Additional Information" />
+        <Textarea
           name="info"
           id="info"
           value={additionalInfo}
-          onChange={updateField}
+          handleChange={updateField}
           placeholder="Additional Info..."
-          cols=""
-          row=""
         />
       </fieldset>
-      <button
-        className="btn btn-secondary suggesions-btn"
-        onClick={toggleSuggestion}
-      >
-        Suggestions
-      </button>
+      <Button
+        kind="secondary"
+        className="suggesions-btn"
+        handleClick={toggleSuggestion}
+        value="Suggestions"
+      />
       {isSuggestionOpen && renderSuggestions()}
     </div>
   );

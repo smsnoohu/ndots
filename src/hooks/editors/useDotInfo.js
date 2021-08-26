@@ -155,6 +155,7 @@ function useDotInfo() {
   };
 
   const handleColorPicker = (color) => {
+    console.log("123", color);
     dispatch({ type: ACTION_TYPES.UPDATE_COLOR, payload: color.hex });
   };
 

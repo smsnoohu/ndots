@@ -1,8 +1,8 @@
 import React from "react";
 
-import { useTab } from "../../../../hooks";
+import { useTab, useMyFiles } from "../../../../hooks";
 import EditorInner from "../../EditorInner";
-import { TabNav } from "../../../";
+import { TabNav, Button, Inputbox } from "../../../";
 import { MyFiles } from "./tabs";
 
 import { FILES_TAB_ID, FILES_TAB } from "../../../../constants/constants";
@@ -12,13 +12,22 @@ const Files = () => {
     FILES_TAB,
     FILES_TAB_ID.FILES_ID
   );
+  const { fileState, fileActions } = useMyFiles();
+  const { fileName } = fileState;
+  const { findFile } = fileActions;
   const returnBody = () => (
     <>
       <div className="file-container-header">
         <div className="input-group pb-10">
-          <button className="btn btn-primary fa fa-plus"> New</button>
-          <input type="text" name="find" id="find" className="form-control" />
-          <button className="btn btn-secondary fa fa-search" />
+          <Button kind="primary" icon="plus" value="New" />
+          <Inputbox
+            name="find"
+            id="find"
+            placeholder="Find file"
+            value={fileName}
+            handleChange={findFile}
+          />
+          <Button kind="secondary" icon="search" />
         </div>
       </div>
       <TabNav tabOption={tabOption} tabAction={tabAction} activeTab={activeTab}>

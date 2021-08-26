@@ -1,7 +1,7 @@
 import React from "react";
 
 import EditorInner from "../../EditorInner";
-// import { useNotes } from "../../../../hooks";
+import { Label, Inputbox, Textarea, Button } from "../../../";
 
 const Comments = (props) => {
   // const { noteState, noteActions } = useNotes();
@@ -11,12 +11,8 @@ const Comments = (props) => {
   const returnBody = () => (
     <>
       <fieldset>
-        <label htmlFor="title" className="form-label">
-          Title
-        </label>
-        <input
-          className="form-control"
-          type="text"
+        <Label htmlFor="title" value="Title" />
+        <Inputbox
           name="title"
           id="title"
           // value={title}
@@ -25,18 +21,13 @@ const Comments = (props) => {
         />
       </fieldset>
       <fieldset className="pt-20">
-        <label htmlFor="comments" className="form-label">
-          Comments
-        </label>
-        <textarea
-          className="form-control"
+        <Label htmlFor="comments" value="Comments" />
+        <Textarea
           name="comments"
           id="comments"
           // value={title}
           // onChange={updateField}
           placeholder="Comments..."
-          cols=""
-          row=""
         />
       </fieldset>
     </>
@@ -44,8 +35,8 @@ const Comments = (props) => {
 
   const returnFooter = () => (
     <>
-      <button className="btn btn-secondary">Cancel</button>
-      <button className="btn btn-primary">Submit</button>
+      <Button king="secondary">Cancel</Button>
+      <Button className="primary">Submit</Button>
     </>
   );
 

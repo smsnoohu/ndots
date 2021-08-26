@@ -53,6 +53,10 @@
     opacity: $btn-disabled-opacity;
     @include box-shadow(none);
   }
+
+  + .btn {
+    margin-left: 10px;
+  }
 }
 
 //

@@ -114,6 +114,20 @@
   &:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
     background-color: $form-file-button-hover-bg;
   }
+  @at-root {
+    select#{&} {
+      @include select;
+      &-inline {
+        @include select;
+        display: inline-block;
+        margin: 0 10px;
+        width: auto;
+      }
+    }
+    textarea#{&} {
+      height: 70px;
+    }
+  }
 }
 
 // Readonly controls as plain text
@@ -229,38 +243,66 @@ textarea {
     @include border-radius($input-border-radius);
   }
 }
-.custom-check {
+.check {
+  @include customRadioCheck();
+}
+.radio {
+  @include customRadioCheck();
   input {
-    position: absolute;
-    opacity: 0;
-    + label {
-      position: relative;
-      padding-left: 28px;
-      cursor: pointer;
-      display: inline-block;
-      &:before {
-        position: absolute;
-        content: "";
-        width: 18px;
-        height: 18px;
-        background-color: rgba($gray-600, 0.7);
-        border: solid 1px $gray-400;
-        left: 0;
+    & + label {
+      &:before,
+      &:after {
+        @include border-radius(50%);
       }
     }
-    &:checked {
-      + label {
-        &:after {
-          position: absolute;
-          content: "";
-          width: 12px;
-          height: 6px;
-          border-left: solid 2px $gray-100;
-          border-bottom: solid 2px $gray-100;
-          left: 3px;
-          top: 4px;
-          transform: rotate(-45deg);
-        }
+  }
+}
+// .custom-check {
+//   input {
+//     position: absolute;
+//     opacity: 0;
+//     + label {
+//       position: relative;
+//       padding-left: 28px;
+//       cursor: pointer;
+//       display: inline-block;
+//       &:before {
+//         position: absolute;
+//         content: "";
+//         width: 18px;
+//         height: 18px;
+//         background-color: rgba($gray-600, 0.7);
+//         border: solid 1px $gray-400;
+//         left: 0;
+//       }
+//     }
+//     &:checked {
+//       + label {
+//         &:after {
+//           position: absolute;
+//           content: "";
+//           width: 12px;
+//           height: 6px;
+//           border-left: solid 2px $gray-100;
+//           border-bottom: solid 2px $gray-100;
+//           left: 3px;
+//           top: 4px;
+//           transform: rotate(-45deg);
+//         }
+//       }
+//     }
+//   }
+// }
+.check {
+  @include customRadioCheck;
+}
+.radio {
+  @include customRadioCheck;
+  input {
+    & + label {
+      &:before,
+      &:after {
+        @include border-radius(50%);
       }
     }
   }
