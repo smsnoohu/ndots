@@ -4,10 +4,11 @@ const Chcekbox = ({
   className,
   name,
   value,
-  handleChange,
+  onChange,
   disabled,
   checked,
   label,
+  hiddenLabel,
 }) => {
   return (
     <div className={`check ${className ? " " + className : ""}`}>
@@ -16,9 +17,10 @@ const Chcekbox = ({
         name={name}
         id={id}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         disabled={disabled}
         checked={checked || ""}
+        aria-label={label}
       />
       <label htmlFor={id}>{label}</label>
     </div>

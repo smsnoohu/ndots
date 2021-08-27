@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer } from "react";
 
 const ACTION_TYPES = {
   UPDATE_STATE: "update_state",

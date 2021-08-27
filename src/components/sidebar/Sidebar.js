@@ -15,7 +15,7 @@ const Sidebar = () => {
   } = eventState;
   const { toggleEditor, closeEditor } = eventActions;
 
-  const handleClickOutside = (event) => {
+  const onClickOutside = (event) => {
     if (
       editorWrapperRef.current &&
       !editorWrapperRef.current.contains(event.target)
@@ -26,9 +26,9 @@ const Sidebar = () => {
 
   // below is the same as componentDidMount and componentDidUnmount
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside, false);
+    document.addEventListener("click", onClickOutside, false);
     return () => {
-      document.removeEventListener("click", handleClickOutside, false);
+      document.removeEventListener("click", onClickOutside, false);
     };
   }, []);
   return (

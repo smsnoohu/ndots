@@ -26,3 +26,16 @@
     font-weight: 900;
   }
 }
+
+.fa2 {
+  font-size: 1.5rem;
+  &:after {
+    background-color: $white;
+    font-size: 0.7rem;
+    vertical-align: 10px;
+    margin: -5px 0 0 -8px;
+    color: $black;
+    padding: 2px;
+    @include border-radius(50%);
+  }
+}

@@ -25,7 +25,7 @@ const Files = () => {
             id="find"
             placeholder="Find file"
             value={fileName}
-            handleChange={findFile}
+            onChange={findFile}
           />
           <Button kind="secondary" icon="search" />
         </div>

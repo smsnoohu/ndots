@@ -387,6 +387,8 @@ readers do not read off random characters that represent icons */
 .#{$fa-css-prefix}-door-closed:before { content: fa-content($fa-var-door-closed); }
 .#{$fa-css-prefix}-door-open:before { content: fa-content($fa-var-door-open); }
 .#{$fa-css-prefix}-dot-circle:before { content: fa-content($fa-var-dot-circle); }
+.#{$fa-css-prefix}-dot-search:before { content: fa-content($fa-var-dot-circle); }
+.#{$fa-css-prefix}-dot-search:after { content: fa-content($fa-var-search); }
 .#{$fa-css-prefix}-dove:before { content: fa-content($fa-var-dove); }
 .#{$fa-css-prefix}-download:before { content: fa-content($fa-var-download); }
 .#{$fa-css-prefix}-draft2digital:before { content: fa-content($fa-var-draft2digital); }

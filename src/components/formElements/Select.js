@@ -4,7 +4,7 @@ const Select = ({
   className,
   name,
   value,
-  handleChange,
+  onChange,
   disabled,
   placeholder,
   options,
@@ -19,7 +19,7 @@ const Select = ({
       }`}
       name={name}
       id={id}
-      onChange={handleChange}
+      onChange={onChange}
       disabled={disabled}
       value={value}
     >

@@ -1,0 +1,63 @@
+@import "../../../../assets/stylesheets/styles/functions";
+@import "../../../../assets/stylesheets/styles/variables";
+@import "../../../../assets/stylesheets/mixins/mixins";
+
+.comments-wrapper {
+  .comments-container {
+    list-style: none;
+    li {
+      position: relative;
+      background-color: $white;
+      color: $black;
+      margin: 5px 0;
+      @include border-radius(5px);
+      width: calc(100% - 30px);
+      padding: 5px;
+      p {
+        &:first-of-type {
+          font-weight: 600;
+          padding-bottom: 5px;
+        }
+        &:last-of-type {
+          font-weight: 600;
+          font-size: 0.7rem;
+          text-align: right;
+          padding-top: 5px;
+        }
+      }
+      .comment {
+        font-size: 0.9rem;
+      }
+      &:not(.unique):after {
+        position: absolute;
+        content: "";
+        border-top: solid 7px transparent;
+        border-bottom: solid 7px transparent;
+        border-right: solid 7px $white;
+        bottom: 7px;
+        left: -7px;
+      }
+      &.self {
+        background-color: #faffd2;
+        margin-left: 30px;
+        &:after {
+          border-right-width: 0;
+          border-left: solid 10px #faffd2;
+          left: auto;
+          right: -7px;
+        }
+      }
+    }
+  }
+}
+.add-comments-wrapper {
+  position: relative;
+  textarea.form-control {
+    min-height: 50px;
+  }
+  button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+}

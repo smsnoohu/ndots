@@ -5,7 +5,7 @@ const Radio = ({
   name,
   dataName,
   value,
-  handleChange,
+  onChange,
   disabled,
   checked,
 }) => {
@@ -18,7 +18,7 @@ const Radio = ({
         data-name={dataName}
         id={id}
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         disabled={disabled}
         checked={checked}
       />

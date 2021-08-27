@@ -4,7 +4,7 @@ const Textarea = ({
   className,
   name,
   value,
-  handleChange,
+  onChange,
   disabled,
   maxlength,
   placeholder,
@@ -16,7 +16,7 @@ const Textarea = ({
       className={`form-control${className ? " " + className : ""}`}
       name={name}
       id={id}
-      onChange={handleChange}
+      onChange={onChange}
       disabled={disabled}
       maxLength={maxlength}
       placeholder={placeholder}

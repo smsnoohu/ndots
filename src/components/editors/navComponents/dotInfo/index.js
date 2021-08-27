@@ -86,7 +86,7 @@ const DotInfo = (props) => {
           name="dotName"
           id="dotName"
           value={dotName}
-          handleChange={updateField}
+          onChange={updateField}
           placeholder="Maximum 3 words"
         />
       </fieldset>
@@ -94,7 +94,7 @@ const DotInfo = (props) => {
         <Label className="label-block" value="Actions" />
         <div className="btn-group editor-btn-group">
           <div className="bootkmark-wrapper" ref={bookmarkWrapper}>
-            <Button icon="star" title="Star" handleClick={toggleBookmark} />
+            <Button icon="star" title="Star" onClick={toggleBookmark} />
             {isBookmarkOpen && (
               <div className="bookmark-container">
                 <h4>Select Tag</h4>
@@ -102,14 +102,14 @@ const DotInfo = (props) => {
                   <Inputbox
                     name="bookmark"
                     value={bookmark}
-                    handleChange={updateField}
+                    onChange={updateField}
                     autoComplete="off"
                   />
                   <Button
                     kind="primary"
                     className="btn-sm"
                     icon="plus"
-                    handleClick={addBookmarkList}
+                    onClick={addBookmarkList}
                     disabled={!bookmark}
                   />
                 </div>
@@ -122,7 +122,7 @@ const DotInfo = (props) => {
                           name={item.id}
                           id={item.id}
                           checked={item.isSelected}
-                          handleChange={updateBookmark}
+                          onChange={updateBookmark}
                           label={item.name}
                         />
                       </li>
@@ -140,7 +140,7 @@ const DotInfo = (props) => {
               icon="square-full"
               title="Color Picker"
               style={{ color: pickedColor, backgroundColor: pickedColor }}
-              handleClick={toggleColorPicker}
+              onClick={toggleColorPicker}
             />
             {isColorPickerOpen ? (
               <div className="popover">
@@ -160,7 +160,7 @@ const DotInfo = (props) => {
           name="link"
           id="link"
           value={link}
-          handleChange={updateField}
+          onChange={updateField}
           placeholder="http://"
         />
       </fieldset>
@@ -170,14 +170,14 @@ const DotInfo = (props) => {
           name="info"
           id="info"
           value={additionalInfo}
-          handleChange={updateField}
+          onChange={updateField}
           placeholder="Additional Info..."
         />
       </fieldset>
       <Button
         kind="secondary"
         className="suggesions-btn"
-        handleClick={toggleSuggestion}
+        onClick={toggleSuggestion}
         value="Suggestions"
       />
       {isSuggestionOpen && renderSuggestions()}

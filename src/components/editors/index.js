@@ -3,7 +3,7 @@ import React from "react";
 import "./editor.scss";
 import { useEventState } from "../../hooks";
 
-import { Comments, Files, DotInfo } from "./navComponents";
+import { Comments, Files, DotInfo, Links } from "./navComponents";
 import { Button } from "../";
 
 const EditorWrapper = (props) => {
@@ -23,10 +23,12 @@ const EditorWrapper = (props) => {
       : type === "dotInfo"
       ? "Document Info"
       : type === "links"
-      ? "Add Links"
+      ? "Links"
       : type === "comments"
       ? "Comments"
       : "";
+
+  console.log("openopenopen: ", open);
 
   return (
     <>
@@ -41,15 +43,16 @@ const EditorWrapper = (props) => {
               <Button
                 king="close"
                 icon={isEditorExpand ? "compress" : "expand"}
-                handleClick={expandCollapse}
+                onClick={expandCollapse}
               />
-              <Button kind="close" icon="times" handleClick={closeEditor} />
+              <Button kind="close" icon="times" onClick={closeEditor} />
             </div>
             {title && <h2>{title}</h2>}
           </div>
           {type === "files" && <Files />}
           {type === "dotInfo" && <DotInfo />}
           {type === "comments" && <Comments />}
+          {type === "links" && <Links />}
         </div>
       )}
     </>

@@ -1,0 +1,17 @@
+@import "../../../../assets/stylesheets/styles/functions";
+@import "../../../../assets/stylesheets/styles/variables";
+@import "../../../../assets/stylesheets/mixins/mixins";
+
+.link-wrapper {
+  padding: 10px 20px;
+  .link-container {
+    list-style: none;
+    li {
+      @include flexbox;
+      padding-bottom: 10px;
+      .check {
+        margin: 5px 0;
+      }
+    }
+  }
+}

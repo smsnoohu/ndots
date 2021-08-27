@@ -4,7 +4,7 @@ const Inputbox = ({
   className,
   name,
   value,
-  handleChange,
+  onChange,
   disabled,
   maxlength,
   placeholder,
@@ -18,7 +18,7 @@ const Inputbox = ({
       name={name}
       id={id}
       value={value}
-      onChange={handleChange}
+      onChange={onChange}
       disabled={disabled}
       maxLength={maxlength}
       placeholder={placeholder}

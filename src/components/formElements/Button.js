@@ -8,7 +8,7 @@ const Button = ({
   name,
   value,
   children,
-  handleClick,
+  onClick,
   disabled,
   target,
   iconPlace,
@@ -25,7 +25,7 @@ const Button = ({
       }${!value && !children && icon ? " fa fa-" + icon : ""}`}
       name={name}
       id={id}
-      onClick={handleClick}
+      onClick={onClick}
       data-target={target}
       disabled={disabled}
       aria-label={title ? title : value}

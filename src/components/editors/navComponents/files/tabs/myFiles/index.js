@@ -61,7 +61,7 @@ const MyFiles = (props) => {
                   name={data.id}
                   id={data.id}
                   checked={data.isChecked}
-                  handleChange={() => updateCheckbox(data.id)}
+                  onChange={() => updateCheckbox(data.id)}
                 />
               </td>
               <td>{data.name}</td>
