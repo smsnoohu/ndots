@@ -8,6 +8,7 @@ const Radio = ({
   onChange,
   disabled,
   checked,
+  label,
 }) => {
   return (
     <div className="radio">
@@ -22,7 +23,7 @@ const Radio = ({
         disabled={disabled}
         checked={checked}
       />
-      <label htmlFor={id}>{value}</label>
+      <label htmlFor={id}>{label}</label>
     </div>
   );
 };

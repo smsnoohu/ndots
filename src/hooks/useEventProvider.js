@@ -1,4 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useRef, useEffect } from "react";
+
+import { useBreakpoint } from "./";
 
 const ACTION_TYPES = {
   UPDATE_STATE: "update_state",
@@ -8,6 +10,8 @@ const ACTION_TYPES = {
   EDITOR_EXPAND: "editor_expand",
   SET_EDITOR_TYPE: "set_editor_type",
   SET_SELECTED_DOT: "set_selected_dot",
+  TOGGLE_SIDEBAR_OPEN: "toggle_sidebar_open",
+  TOGGLE_SEARCH: "toggle_search",
 };
 
 const initialState = {
@@ -19,6 +23,8 @@ const initialState = {
   isEditorExpand: false,
   editorType: "",
   selectedDot: null,
+  isSidebarOpen: false,
+  isSearchOpen: false,
 };
 
 const EventContext = React.createContext();
@@ -72,6 +78,16 @@ function eventReducer(state, action) {
         ...state,
         selectedDot: action.payload,
       };
+    case ACTION_TYPES.TOGGLE_SIDEBAR_OPEN:
+      return {
+        ...state,
+        isSidebarOpen: action.payload,
+      };
+    case ACTION_TYPES.TOGGLE_SEARCH:
+      return {
+        ...state,
+        isSearchOpen: !state.isSearchOpen,
+      };
     default:
       throw new Error(
         `Unknown action type received.
@@ -83,6 +99,8 @@ function eventReducer(state, action) {
                         * EDITOR_EXPAND
                         * SET_EDITOR_TYPE
                         * SET_SELECTED_DOT
+                        * TOGGLE_SIDEBAR_OPEN
+                        * TOGGLE_SEARCH
                 `
       );
   }
@@ -90,11 +108,14 @@ function eventReducer(state, action) {
 
 function EventProvider(props) {
   const [state, dispatch] = useReducer(eventReducer, initialState);
+  const editorWrapperRef = useRef(null);
+
+  const { breakPoint, viewPort } = useBreakpoint();
 
   const {
     isEditorOpen: { open, openClass },
     editorType,
-    selectedDot,
+    isSidebarOpen,
   } = state;
 
   const toggleEditor = (e, type, item) => {
@@ -110,7 +131,7 @@ function EventProvider(props) {
     });
   };
 
-  const openEditor = (e, type = "explore", item) => {
+  const openEditor = (e, type = "shareToPrivate", item) => {
     e.preventDefault();
     dispatch({ type: ACTION_TYPES.OPEN_EDITOR });
     dispatch({ type: ACTION_TYPES.SET_EDITOR_TYPE, payload: type });
@@ -140,13 +161,52 @@ function EventProvider(props) {
     dispatch({ type: ACTION_TYPES.EDITOR_EXPAND });
   };
 
+  const onClickOutside = (event) => {
+    if (
+      editorWrapperRef.current &&
+      !editorWrapperRef.current.contains(event.target)
+    ) {
+      closeEditor();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", onClickOutside, false);
+    return () => {
+      document.removeEventListener("click", onClickOutside, false);
+    };
+  }, []);
+
+  const toggleSidebar = () => {
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_SIDEBAR_OPEN,
+      payload: !isSidebarOpen,
+    });
+  };
+
+  const closeSidebar = () => {
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_SIDEBAR_OPEN,
+      payload: false,
+    });
+  };
+
+  const toggleSearch = () => {
+    dispatch({ type: ACTION_TYPES.TOGGLE_SEARCH });
+  };
+
   const value = {
-    eventState: { ...state },
+    breakPoint,
+    viewPort,
+    eventState: { ...state, editorWrapperRef, breakPoint, viewPort },
     eventActions: {
       toggleEditor,
       openEditor,
       closeEditor,
       expandCollapse,
+      toggleSidebar,
+      closeSidebar,
+      toggleSearch,
     },
   };
 

@@ -8,37 +8,105 @@
   left: 0;
   bottom: 0;
   width: 70px;
-  background-color: rgba($black, 0.5);
+  background-color: rgba($black, 0.7);
   padding: 0 12.5px;
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    padding: 0 10px;
+    z-index: 2;
+    overflow: auto;
+  }
+  @include media-breakpoint-between(sm, md) {
+    top: 75px;
+  }
+  @include media-breakpoint-down(lg) {
+    overflow-y: auto;
+  }
   > ul {
     list-style: none;
     padding-top: 10px;
     > li {
-      padding: 10px 0 15px;
+      padding: 10px 0;
       position: relative;
       a {
-        color: $gray-500;
-        display: inline-block;
-        width: 45px;
-        height: 45px;
-        text-align: center;
-        line-height: 2.3;
-        @include border-radius(50%);
-        border: solid 1px transparent;
+        color: $gray-400;
         transition: all 0.5s;
         text-decoration: none;
         @include font-size(1.3rem);
-        background-color: rgba($gray-700, 0.3);
+        @include media-breakpoint-down(sm) {
+          span {
+            padding-left: 15px;
+          }
+        }
+        @include media-breakpoint-up(sm) {
+          span {
+            display: none;
+          }
+        }
         &:before {
           text-shadow: 0.2rem 0.2rem 0.25rem rgba($black, 0.3);
+          text-align: center;
+          width: 45px;
+          height: 45px;
+          display: inline-block;
+          line-height: 2.5;
+          z-index: 2;
         }
-        &:hover,
-        &:active,
-        &.active {
-          color: $gray-200;
-          background-color: $gray-600;
-          border-color: $gray-400;
-          text-decoration: none;
+        &:after {
+          position: absolute;
+          transition: all 0.5s;
+          content: "";
+          width: 45px;
+          height: 45px;
+          @include border-radius(50%);
+          border: solid 1px transparent;
+          background-color: rgba($gray-700, 0.3);
+          left: 0;
+          z-index: -1;
+        }
+        @include media-breakpoint-up(sm) {
+          &:hover,
+          &:active,
+          &.active {
+            &:after {
+              color: $gray-200;
+              background-color: $gray-600;
+              border-color: $gray-400;
+              text-decoration: none;
+            }
+          }
+          @include media-breakpoint-up(lg) {
+            &:hover,
+            &:active {
+              span {
+                display: inline-block;
+                position: absolute;
+                white-space: nowrap;
+                margin: 5px 0 0 15px;
+                padding: 10px 15px;
+                color: $gray-200;
+                background-color: rgba($gray-600, 0.8);
+                border: solid 1px $gray-500;
+                @include border-radius(3px);
+                &:before,
+                &:after {
+                  position: absolute;
+                  content: "";
+                  border-top: solid 10px transparent;
+                  border-bottom: solid 10px transparent;
+                  border-right: solid 10px $gray-500;
+                  left: -10px;
+                  top: 8px;
+                }
+                &:after {
+                  border-right-color: $gray-600;
+                  border-width: 8px 8px 8px 0;
+                  left: -8px;
+                  top: 10px;
+                }
+              }
+            }
+          }
         }
       }
     }

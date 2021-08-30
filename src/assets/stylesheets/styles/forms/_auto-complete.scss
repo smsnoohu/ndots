@@ -1,0 +1,22 @@
+.autoComplete-wrapper {
+  position: relative;
+  .autoComplete-container {
+    position: absolute;
+    width: 100%;
+    background-color: $white;
+    border: solid 1px $gray-500;
+    @include border-radius(0 0 5px 5px);
+    top: 30px;
+    overflow-y: auto;
+    max-height: 160px;
+    ul {
+      list-style: none;
+      li {
+        color: $black;
+        padding: 7px 10px;
+        border-bottom: solid 1px $gray-300;
+        cursor: pointer;
+      }
+    }
+  }
+}

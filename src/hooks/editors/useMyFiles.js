@@ -145,7 +145,7 @@ function useMyFiles() {
     const filteredData = tableData.filter(
       (data) => data.name.toLowerCase().indexOf(value) > -1
     );
-    console.log("filteredData: ", filteredData);
+    // console.log("filteredData: ", filteredData);
     dispatch({
       type: ACTION_TYPES.FIND_FILE,
       payload: { value, data: filteredData },

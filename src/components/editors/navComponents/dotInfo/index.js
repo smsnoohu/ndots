@@ -3,13 +3,19 @@ import React from "react";
 import { ChromePicker } from "react-color";
 
 import EditorInner from "../../EditorInner";
-import { useDotInfo } from "../../../../hooks";
-import { Label, Inputbox, Textarea, Checkbox, Button } from "../../../";
+import { useEventState, useDotInfo } from "../../../../hooks";
+import { Label, Inputbox, Textarea, Radio, Button } from "../../../";
 import "./dotInfo.scss";
 import suggetionImg from "../../../../assets/images/logo.png";
 
 const DotInfo = (props) => {
+  const { eventState, eventActions } = useEventState();
   const { dotState, dotActions } = useDotInfo();
+
+  const { viewPort } = eventState;
+
+  if (!viewPort) return null;
+  const { xs, sm, md, lg, xl } = viewPort;
 
   const {
     isColorPickerOpen,
@@ -118,8 +124,8 @@ const DotInfo = (props) => {
                     bookmarkList.length &&
                     bookmarkList.map((item) => (
                       <li key={item.id}>
-                        <Checkbox
-                          name={item.id}
+                        <Radio
+                          name="bookmark"
                           id={item.id}
                           checked={item.isSelected}
                           onChange={updateBookmark}
@@ -174,13 +180,15 @@ const DotInfo = (props) => {
           placeholder="Additional Info..."
         />
       </fieldset>
-      <Button
-        kind="secondary"
-        className="suggesions-btn"
-        onClick={toggleSuggestion}
-        value="Suggestions"
-      />
-      {isSuggestionOpen && renderSuggestions()}
+      {!xs && !sm && (
+        <Button
+          kind="secondary"
+          className="suggesions-btn"
+          onClick={toggleSuggestion}
+          value="Suggestions"
+        />
+      )}
+      {!xs && !sm && isSuggestionOpen && renderSuggestions()}
     </div>
   );
   return <EditorInner body={returnBody()} />;

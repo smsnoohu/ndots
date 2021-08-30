@@ -155,7 +155,6 @@ function useDotInfo() {
   };
 
   const handleColorPicker = (color) => {
-    console.log("123", color);
     dispatch({ type: ACTION_TYPES.UPDATE_COLOR, payload: color.hex });
   };
 
@@ -215,9 +214,10 @@ function useDotInfo() {
   const updateBookmark = (e) => {
     const { id } = e.target;
     const newState = bookmarkList.map((item) =>
-      item.id === id ? { ...item, isSelected: !item.isSelected } : item
+      item.id === id
+        ? { ...item, isSelected: !item.isSelected }
+        : { ...item, isSelected: false }
     );
-    console.log("newState: ", id, newState);
     dispatch({ type: ACTION_TYPES.UPDATE_TAGS, payload: newState });
   };
 

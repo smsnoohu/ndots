@@ -3,15 +3,29 @@
 @import "../../../../assets/stylesheets/mixins/mixins";
 
 .link-wrapper {
-  padding: 10px 20px;
   .link-container {
     list-style: none;
-    li {
+    > li {
       @include flexbox;
       padding-bottom: 10px;
+      .autoComplete-wrapper {
+        flex: 1;
+        margin-right: 10px;
+      }
       .check {
         margin: 5px 0;
       }
+    }
+  }
+  .description-container {
+    margin-top: 10px;
+    h4 {
+      padding: 15px 0;
+      border-top: solid 1px $gray-300;
+    }
+    p {
+      padding-bottom: 15px;
+      border-bottom: solid 1px $gray-300;
     }
   }
 }

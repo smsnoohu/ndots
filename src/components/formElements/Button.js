@@ -13,6 +13,7 @@ const Button = ({
   target,
   iconPlace,
   icon,
+  iconType,
   style,
   title,
 }) => {
@@ -22,7 +23,9 @@ const Button = ({
       style={style}
       className={`btn${kind ? " btn-" + kind : ""}${
         className ? " " + className : ""
-      }${!value && !children && icon ? " fa fa-" + icon : ""}`}
+      }${!value && !children && icon ? " fa fa-" + icon : ""}${
+        !value && !children && iconType ? " " + iconType : ""
+      }`}
       name={name}
       id={id}
       onClick={onClick}
@@ -32,12 +35,18 @@ const Button = ({
       title={title ? title : value}
     >
       {(value || children) && icon && iconPlace !== "right" && (
-        <em className={`fa fa-${icon} icon-left`}></em>
+        <em
+          className={`fa${iconType ? " " + iconType : ""} fa-${icon} icon-left`}
+        ></em>
       )}
       {!children && value && value}
       {children && children}
       {(value || children) && icon && iconPlace === "right" && (
-        <em className={`fa fa-${icon} icon-right`}></em>
+        <em
+          className={`fa${
+            iconType ? " " + iconType : ""
+          } fa-${icon} icon-right`}
+        ></em>
       )}
     </button>
   );

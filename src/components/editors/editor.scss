@@ -7,15 +7,29 @@
   left: -500px;
   top: 50px;
   bottom: 0;
-  background-color: rgba($black, 0.5);
-  width: 350px;
+  background-color: rgba($black, 0.9);
+  width: 100%;
   @include flexbox;
   @include flex-direction(column);
   transition: ease-in-out all 0.5s;
-  &.open {
-    left: 80px;
-    &.expand {
-      width: 600px;
+  left: 0;
+  z-index: 3;
+  @include media-breakpoint-up(sm) {
+    background-color: rgba($black, 0.5);
+    width: 350px;
+    &.open {
+      left: 80px;
+      &.expand {
+        width: 600px;
+      }
+      @include media-breakpoint-between(sm, md) {
+        width: calc(100% - 70px);
+        left: 70px;
+      }
+      @include media-breakpoint-between(md, lg) {
+        width: 60%;
+        left: 70px;
+      }
     }
   }
   .editor-header {
@@ -48,8 +62,8 @@
   @include border-radius(2px);
 }
 .swatch {
-  padding: "5px";
-  background-color: "#fff";
+  padding: 5px;
+  background-color: $white;
   @include border-radius(1px);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
   display: inline-block;

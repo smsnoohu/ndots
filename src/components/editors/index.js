@@ -3,7 +3,7 @@ import React from "react";
 import "./editor.scss";
 import { useEventState } from "../../hooks";
 
-import { Comments, Files, DotInfo, Links } from "./navComponents";
+import { Comments, Files, DotInfo, Links, Share } from "./navComponents";
 import { Button } from "../";
 
 const EditorWrapper = (props) => {
@@ -12,14 +12,18 @@ const EditorWrapper = (props) => {
     isEditorOpen: { open, openClass },
     editorType: type,
     isEditorExpand,
+    viewPort,
   } = eventState;
-  const { expandCollapse, closeEditor } = eventActions;
+  const { expandCollapse, closeEditor, toggleSidebar } = eventActions;
+
+  if (!viewPort) return null;
+  const { xs, sm, md, lg, xl } = viewPort;
 
   const title =
     type === "files"
       ? "Files"
-      : type === "explore"
-      ? "Explore"
+      : type === "shareToPrivate"
+      ? "Share"
       : type === "dotInfo"
       ? "Document Info"
       : type === "links"
@@ -28,7 +32,7 @@ const EditorWrapper = (props) => {
       ? "Comments"
       : "";
 
-  console.log("openopenopen: ", open);
+  // console.log("openopenopen: ", open);
 
   return (
     <>
@@ -40,12 +44,19 @@ const EditorWrapper = (props) => {
         >
           <div className="editor-header">
             <div className="editor-close-btn-container">
+              {!xs && !sm && !md && (
+                <Button
+                  king="close"
+                  icon={isEditorExpand ? "compress" : "expand"}
+                  onClick={expandCollapse}
+                  className="expand-btn"
+                />
+              )}
               <Button
-                king="close"
-                icon={isEditorExpand ? "compress" : "expand"}
-                onClick={expandCollapse}
+                kind="close"
+                icon="times"
+                onClick={xs ? toggleSidebar : closeEditor}
               />
-              <Button kind="close" icon="times" onClick={closeEditor} />
             </div>
             {title && <h2>{title}</h2>}
           </div>
@@ -53,6 +64,7 @@ const EditorWrapper = (props) => {
           {type === "dotInfo" && <DotInfo />}
           {type === "comments" && <Comments />}
           {type === "links" && <Links />}
+          {type === "shareToPrivate" && <Share />}
         </div>
       )}
     </>

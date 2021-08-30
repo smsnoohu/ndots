@@ -1,0 +1,28 @@
+@import "../../../../assets/stylesheets/styles/functions";
+@import "../../../../assets/stylesheets/styles/variables";
+@import "../../../../assets/stylesheets/mixins/mixins";
+
+.share-container {
+  .invite-list {
+    list-style: none;
+    li {
+      @include flexbox;
+      padding: 10px 15px;
+      &:nth-child(even) {
+        background-color: rgba($gray-800, 0.6);
+      }
+      span {
+        line-height: 1.5;
+        flex: 1;
+      }
+    }
+  }
+  .qr-code {
+    max-width: 200px;
+    background-color: $white;
+    margin: 20px auto;
+    img {
+      max-width: 200px;
+    }
+  }
+}
