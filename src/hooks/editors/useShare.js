@@ -1,4 +1,4 @@
-import { useReducer, useRef, useEffect } from "react";
+import { useReducer } from "react";
 
 import { generateID, validateEmail } from "../../utilities/common";
 
@@ -69,7 +69,6 @@ function useShare() {
 
   const updateInviteField = (e) => {
     const { name, value } = e.target;
-    console.log("name, value: ", name, value);
     dispatch({
       type: ACTION_TYPES.UPDATE_INVITE_FIELD,
       payload: { name, value },

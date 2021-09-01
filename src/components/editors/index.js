@@ -3,7 +3,7 @@ import React from "react";
 import "./editor.scss";
 import { useEventState } from "../../hooks";
 
-import { Comments, Files, DotInfo, Links, Share } from "./navComponents";
+import { Comments, Files, DotInfo, Links, Share, Video } from "./navComponents";
 import { Button } from "../";
 
 const EditorWrapper = (props) => {
@@ -13,6 +13,9 @@ const EditorWrapper = (props) => {
     editorType: type,
     isEditorExpand,
     viewPort,
+    videoMenuRef,
+    videoWrapperPos,
+    isVideoMenuOpen,
   } = eventState;
   const { expandCollapse, closeEditor, toggleSidebar } = eventActions;
 
@@ -31,8 +34,6 @@ const EditorWrapper = (props) => {
       : type === "comments"
       ? "Comments"
       : "";
-
-  // console.log("openopenopen: ", open);
 
   return (
     <>
@@ -66,6 +67,9 @@ const EditorWrapper = (props) => {
           {type === "links" && <Links />}
           {type === "shareToPrivate" && <Share />}
         </div>
+      )}
+      {isVideoMenuOpen && (
+        <Video eventState={eventState} eventActions={eventActions} />
       )}
     </>
   );

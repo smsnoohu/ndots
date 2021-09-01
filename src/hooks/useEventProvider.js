@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useEffect } from "react";
+import React, { useReducer, useRef, useEffect, useLayoutEffect } from "react";
 
 import { useBreakpoint } from "./";
 
@@ -12,6 +12,9 @@ const ACTION_TYPES = {
   SET_SELECTED_DOT: "set_selected_dot",
   TOGGLE_SIDEBAR_OPEN: "toggle_sidebar_open",
   TOGGLE_SEARCH: "toggle_search",
+  TOGGLE_VIDEO_MENU: "toggle_video_menu",
+  SET_VIDEO_WRAPPER_POSITION: "set_video_wrapper_position",
+  TOGGLE_VIDEO_EXPAND: "toggle_video_expand",
 };
 
 const initialState = {
@@ -25,6 +28,9 @@ const initialState = {
   selectedDot: null,
   isSidebarOpen: false,
   isSearchOpen: false,
+  isVideoMenuOpen: false,
+  videoWrapperPos: {},
+  isVideoExpand: true,
 };
 
 const EventContext = React.createContext();
@@ -88,6 +94,25 @@ function eventReducer(state, action) {
         ...state,
         isSearchOpen: !state.isSearchOpen,
       };
+    case ACTION_TYPES.TOGGLE_VIDEO_MENU:
+      return {
+        ...state,
+        isVideoMenuOpen: !state.isVideoMenuOpen,
+        editorType: action.payload.type,
+      };
+    case ACTION_TYPES.SET_VIDEO_WRAPPER_POSITION:
+      return {
+        ...state,
+        videoWrapperPos: {
+          left: action.payload.left,
+          top: action.payload.top,
+        },
+      };
+    case ACTION_TYPES.TOGGLE_VIDEO_EXPAND:
+      return {
+        ...state,
+        isVideoExpand: action.payload,
+      };
     default:
       throw new Error(
         `Unknown action type received.
@@ -101,6 +126,9 @@ function eventReducer(state, action) {
                         * SET_SELECTED_DOT
                         * TOGGLE_SIDEBAR_OPEN
                         * TOGGLE_SEARCH
+                        * TOGGLE_VIDEO_MENU
+                        * SET_VIDEO_WRAPPER_POSITION
+                        * TOGGLE_VIDEO_EXPAND
                 `
       );
   }
@@ -108,7 +136,9 @@ function eventReducer(state, action) {
 
 function EventProvider(props) {
   const [state, dispatch] = useReducer(eventReducer, initialState);
+
   const editorWrapperRef = useRef(null);
+  const videoMenuRef = useRef(null);
 
   const { breakPoint, viewPort } = useBreakpoint();
 
@@ -116,6 +146,7 @@ function EventProvider(props) {
     isEditorOpen: { open, openClass },
     editorType,
     isSidebarOpen,
+    isVideoExpand,
   } = state;
 
   const toggleEditor = (e, type, item) => {
@@ -195,10 +226,43 @@ function EventProvider(props) {
     dispatch({ type: ACTION_TYPES.TOGGLE_SEARCH });
   };
 
+  function updatePosition() {
+    const postion = videoMenuRef.current.getBoundingClientRect();
+    dispatch({
+      type: ACTION_TYPES.SET_VIDEO_WRAPPER_POSITION,
+      payload: { top: postion.top, left: postion.left + postion.width + 15 },
+    });
+  }
+
+  const toggleVideoMenu = (e, type) => {
+    e.preventDefault();
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_VIDEO_MENU,
+      payload: {
+        type: type !== editorType ? type : "",
+      },
+    });
+    videoMenuRef && videoMenuRef.current && updatePosition();
+    dispatch({ type: ACTION_TYPES.TOGGLE_VIDEO_EXPAND, payload: true });
+  };
+
+  const toggleVideoExpand = () => {
+    dispatch({
+      type: ACTION_TYPES.TOGGLE_VIDEO_EXPAND,
+      payload: !isVideoExpand,
+    });
+  };
+
   const value = {
     breakPoint,
     viewPort,
-    eventState: { ...state, editorWrapperRef, breakPoint, viewPort },
+    eventState: {
+      ...state,
+      editorWrapperRef,
+      breakPoint,
+      viewPort,
+      videoMenuRef,
+    },
     eventActions: {
       toggleEditor,
       openEditor,
@@ -207,6 +271,8 @@ function EventProvider(props) {
       toggleSidebar,
       closeSidebar,
       toggleSearch,
+      toggleVideoMenu,
+      toggleVideoExpand,
     },
   };
 

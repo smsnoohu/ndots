@@ -27,7 +27,7 @@ const Share = () => {
           <div className="error-text">Invalid Email Address</div>
         )}
         <div className="row pt-20">
-          <div className="col-sm-3 pb-20">
+          <div className="col-sm-4 pb-20">
             <select
               name="inviteAccessType"
               id="inviteAccessType"
@@ -54,7 +54,8 @@ const Share = () => {
         {inviteList && inviteList.length
           ? inviteList.map((list) => (
               <li key={list.id}>
-                <span>{list.email}</span>
+                <span title={list.email}>{list.email}</span>
+                <em>{list.accessType}</em>
                 <Button
                   kind="danger"
                   icon="times"
@@ -69,7 +70,7 @@ const Share = () => {
         <img src={QRCode} alt="QR Code" />
       </div>
       <div className="row">
-        <div className="col-sm-3 pb-20">
+        <div className="col-sm-4 pb-20">
           <select
             name="inviteAccessType"
             id="inviteAccessType"
@@ -80,7 +81,7 @@ const Share = () => {
             <option value="edit">Edit</option>
           </select>
         </div>
-        <div className="col-sm-9">
+        <div className="col-sm-8">
           <Button kind="primary" value="Generate QR Code" />
         </div>
       </div>

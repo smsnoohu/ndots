@@ -1,0 +1,27 @@
+@import "../../../../assets/stylesheets/styles/functions";
+@import "../../../../assets/stylesheets/styles/variables";
+@import "../../../../assets/stylesheets/mixins/mixins";
+
+.video-wrapper {
+  position: absolute;
+  background-color: $gray-900;
+  width: 300px;
+  z-index: 4;
+  .video-header {
+    @include flexbox;
+    padding: 5px 5px 5px 15px;
+    cursor: move;
+    h2 {
+      flex: 1;
+    }
+  }
+  .video-container {
+    width: calc(100% - 30px);
+    height: 150px;
+    margin: auto;
+    border: solid 1px $gray-500;
+  }
+  .video-footer {
+    padding: 5px;
+  }
+}

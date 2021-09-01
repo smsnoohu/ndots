@@ -8,12 +8,18 @@
     li {
       @include flexbox;
       padding: 10px 15px;
+      line-height: 1.5;
       &:nth-child(even) {
         background-color: rgba($gray-800, 0.6);
       }
       span {
-        line-height: 1.5;
         flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      em {
+        text-transform: capitalize;
+        padding: 0 5px;
       }
     }
   }

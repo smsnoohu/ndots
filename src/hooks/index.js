@@ -8,4 +8,5 @@ export {
   useLinks,
   useShare,
   useComments,
+  useVideo,
 } from "./editors";

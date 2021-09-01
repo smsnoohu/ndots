@@ -28,7 +28,9 @@ const Header = () => {
         <div className="logo">
           <img src={logo} alt="nDots.io" />
         </div>
-        {!xs && !sm && <h1>Islamic Education - {breakPoint}</h1>}
+        {!xs && !sm && (
+          <h1 title="Islamic Education">Islamic Education - {breakPoint}</h1>
+        )}
         {(!xs || (xs && isSearchOpen)) && (
           <form className="search-container">
             {xs && (

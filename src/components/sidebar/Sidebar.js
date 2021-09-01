@@ -15,8 +15,10 @@ const Sidebar = () => {
     breakPoint,
     viewPort,
     isSidebarOpen,
+    videoMenuRef,
+    isVideoMenuOpen,
   } = eventState;
-  const { toggleEditor } = eventActions;
+  const { toggleEditor, toggleVideoMenu } = eventActions;
 
   if (!viewPort) return null;
   const { xs, sm, md, lg, xl } = viewPort;
@@ -88,9 +90,23 @@ const Sidebar = () => {
                   <span>Comments</span>
                 </a>
               </li>
+              <li>
+                <a
+                  href="#"
+                  ref={videoMenuRef}
+                  className={`fa fa-video ${type === "video" ? "active" : ""} ${
+                    isVideoMenuOpen ? "videoOpen" : ""
+                  }`}
+                  aria-label="Record"
+                  title="Record"
+                  onClick={(e) => toggleVideoMenu(e, "video")}
+                >
+                  <span>Record</span>
+                </a>
+              </li>
             </ul>
           </nav>
-          <EditorWrapper type="notes" />
+          <EditorWrapper />
         </aside>
       )}
     </>
