@@ -7,10 +7,10 @@
   background-color: $gray-900;
   width: 300px;
   z-index: 4;
+  cursor: move;
   .video-header {
     @include flexbox;
-    padding: 5px 5px 5px 15px;
-    cursor: move;
+    padding: 10px 5px 10px 15px;
     h2 {
       flex: 1;
     }

@@ -1,0 +1,49 @@
+@import "../../../assets/stylesheets/styles/functions";
+@import "../../../assets/stylesheets/styles/variables";
+@import "../../../assets/stylesheets/mixins/mixins";
+
+.notification-wrapper {
+  position: absolute;
+  width: 400px;
+  background-color: rgba($gray-800, 0.7);
+  border: solid 1px $gray-400;
+  @include border-radius(5px);
+  padding: 10px 15px;
+  right: -10px;
+  top: 40px;
+  &:before,
+  &:after {
+    position: absolute;
+    content: "";
+    border-left: solid 10px transparent;
+    border-right: solid 10px transparent;
+    border-bottom: solid 10px $gray-400;
+    top: -10px;
+    right: 30px;
+  }
+  &:after {
+    border-width: 0 8px 8px 8px;
+    border-bottom-color: rgba($gray-800, 0.9);
+    top: -8px;
+    right: 32px;
+  }
+  .notification-list {
+    list-style: none;
+    max-height: 400px;
+    overflow-y: auto;
+    li {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: solid 1px $gray-400;
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+  .btn {
+    width: 100%;
+    border-top: solid 1px $gray-400;
+    margin-top: 10px;
+    text-align: left;
+  }
+}

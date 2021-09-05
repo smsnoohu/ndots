@@ -1,7 +1,6 @@
 import React from "react";
 
-import Header from "./components/header/Header";
-import Sidebar from "./components/sidebar/Sidebar";
+import { Header, Sidebar } from "./components";
 
 const App = () => {
   return (

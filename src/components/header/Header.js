@@ -1,16 +1,25 @@
 import React from "react";
 
-import { Inputbox, Button } from "../";
+import { Inputbox, Button, Notifications } from "../";
 import "./header.scss";
 import logo from "../../assets/images/logo.png";
 import profileImg from "../../assets/images/profile.png";
-import { useEventState } from "../../hooks";
+import { useEventState, useNotifications } from "../../hooks";
 import { BREAKPOINT } from "../../constants/constants";
 
 const Header = () => {
   const { eventState, eventActions } = useEventState();
+  const { notificaionsState, notificaionsActions } = useNotifications();
+
   const { breakPoint, viewPort, isSearchOpen } = eventState;
   const { toggleSidebar, closeSidebar, toggleSearch } = eventActions;
+
+  const {
+    isNotificationsWrapperOpen,
+    notificationsWrapper,
+    noOfUnreadNotificaions,
+  } = notificaionsState;
+  const { toggleNotificationsWrapper } = notificaionsActions;
 
   if (!viewPort) return null;
   const { xs, sm, md, lg, xl } = viewPort;
@@ -61,7 +70,19 @@ const Header = () => {
               }}
             />
           )}
-          <div className="header-notification fa fa-bell">05</div>
+          <div className="header-notification" ref={notificationsWrapper}>
+            <Button
+              icon="bell"
+              value={noOfUnreadNotificaions}
+              onClick={toggleNotificationsWrapper}
+            />
+            {isNotificationsWrapperOpen && (
+              <Notifications
+                notificaionsState={notificaionsState}
+                notificaionsActions={notificaionsActions}
+              />
+            )}
+          </div>
           <div className="header-profile">
             {false ? (
               <em className="fa fa-user-circle"></em>

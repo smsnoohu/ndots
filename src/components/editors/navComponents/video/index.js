@@ -14,13 +14,14 @@ const Video = (props) => {
   } = videoState;
   const { dragStart, dragging, dragEnd } = videoActions;
   return (
-    <div className="video-wrapper" style={styles}>
-      <div
-        className="video-header"
-        onMouseDown={dragStart}
-        onMouseMove={dragging}
-        onMouseUp={dragEnd}
-      >
+    <div
+      className="video-wrapper"
+      style={styles}
+      onMouseDown={dragStart}
+      onMouseMove={dragging}
+      onMouseUp={dragEnd}
+    >
+      <div className="video-header">
         <h2 data-remove="true">Record</h2>
         <Button
           icon={`${isVideoExpand ? "window-minimize" : "window-maximize"}`}

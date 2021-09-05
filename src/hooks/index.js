@@ -10,3 +10,6 @@ export {
   useComments,
   useVideo,
 } from "./editors";
+
+export { default as useSettings } from "./profile/useSettings";
+export { default as useNotifications } from "./profile/useNotifications";

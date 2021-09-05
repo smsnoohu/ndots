@@ -15,6 +15,7 @@ const ACTION_TYPES = {
   TOGGLE_VIDEO_MENU: "toggle_video_menu",
   SET_VIDEO_WRAPPER_POSITION: "set_video_wrapper_position",
   TOGGLE_VIDEO_EXPAND: "toggle_video_expand",
+  TOGGLE_SETTINGS: "toggle_settings",
 };
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
   isVideoMenuOpen: false,
   videoWrapperPos: {},
   isVideoExpand: true,
+  isSettingsOpen: false,
 };
 
 const EventContext = React.createContext();
@@ -113,6 +115,11 @@ function eventReducer(state, action) {
         ...state,
         isVideoExpand: action.payload,
       };
+    case ACTION_TYPES.TOGGLE_SETTINGS:
+      return {
+        ...state,
+        isSettingsOpen: action.payload,
+      };
     default:
       throw new Error(
         `Unknown action type received.
@@ -129,6 +136,7 @@ function eventReducer(state, action) {
                         * TOGGLE_VIDEO_MENU
                         * SET_VIDEO_WRAPPER_POSITION
                         * TOGGLE_VIDEO_EXPAND
+                        * TOGGLE_SETTINGS
                 `
       );
   }
@@ -139,6 +147,7 @@ function EventProvider(props) {
 
   const editorWrapperRef = useRef(null);
   const videoMenuRef = useRef(null);
+  const settingsWrapperRef = useRef(null);
 
   const { breakPoint, viewPort } = useBreakpoint();
 
@@ -147,6 +156,7 @@ function EventProvider(props) {
     editorType,
     isSidebarOpen,
     isVideoExpand,
+    isSettingsOpen,
   } = state;
 
   const toggleEditor = (e, type, item) => {
@@ -192,22 +202,6 @@ function EventProvider(props) {
     dispatch({ type: ACTION_TYPES.EDITOR_EXPAND });
   };
 
-  const onClickOutside = (event) => {
-    if (
-      editorWrapperRef.current &&
-      !editorWrapperRef.current.contains(event.target)
-    ) {
-      closeEditor();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", onClickOutside, false);
-    return () => {
-      document.removeEventListener("click", onClickOutside, false);
-    };
-  }, []);
-
   const toggleSidebar = () => {
     dispatch({
       type: ACTION_TYPES.TOGGLE_SIDEBAR_OPEN,
@@ -226,13 +220,13 @@ function EventProvider(props) {
     dispatch({ type: ACTION_TYPES.TOGGLE_SEARCH });
   };
 
-  function updatePosition() {
+  const updatePosition = () => {
     const postion = videoMenuRef.current.getBoundingClientRect();
     dispatch({
       type: ACTION_TYPES.SET_VIDEO_WRAPPER_POSITION,
       payload: { top: postion.top, left: postion.left + postion.width + 15 },
     });
-  }
+  };
 
   const toggleVideoMenu = (e, type) => {
     e.preventDefault();
@@ -253,6 +247,39 @@ function EventProvider(props) {
     });
   };
 
+  const toggleSettings = () => {
+    dispatch({ type: ACTION_TYPES.TOGGLE_SETTINGS, payload: !isSettingsOpen });
+  };
+
+  const closeSettings = () => {
+    dispatch({ type: ACTION_TYPES.TOGGLE_SETTINGS, payload: false });
+  };
+
+  const onClickOutside = (event) => {
+    // Editor
+    if (
+      editorWrapperRef.current &&
+      !editorWrapperRef.current.contains(event.target)
+    ) {
+      closeEditor();
+    }
+
+    // Settings
+    if (
+      settingsWrapperRef.current &&
+      !settingsWrapperRef.current.contains(event.target)
+    ) {
+      closeSettings();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", onClickOutside, false);
+    return () => {
+      document.removeEventListener("click", onClickOutside, false);
+    };
+  }, []);
+
   const value = {
     breakPoint,
     viewPort,
@@ -262,6 +289,7 @@ function EventProvider(props) {
       breakPoint,
       viewPort,
       videoMenuRef,
+      settingsWrapperRef,
     },
     eventActions: {
       toggleEditor,
@@ -273,6 +301,7 @@ function EventProvider(props) {
       toggleSearch,
       toggleVideoMenu,
       toggleVideoExpand,
+      toggleSettings,
     },
   };
 

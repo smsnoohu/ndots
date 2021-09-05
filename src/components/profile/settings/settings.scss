@@ -1,0 +1,58 @@
+@import "../../../assets/stylesheets/styles/functions";
+@import "../../../assets/stylesheets/styles/variables";
+@import "../../../assets/stylesheets/mixins/mixins";
+
+.setting-wrapper {
+  .setting-icon {
+    position: fixed;
+    right: 0;
+    top: 100px;
+    padding: 10px 12px;
+    border-radius: 5px 0 0 5px;
+    outline: none !important;
+    border-right: 0;
+    &:before {
+      font-size: 1.5rem;
+    }
+    &.open {
+      right: 299px;
+      background-color: rgba($black, 0.7);
+      z-index: 1;
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: rgba($black, 0.7);
+        outline: none;
+        box-shadow: none;
+      }
+    }
+  }
+  .setting-container {
+    position: fixed;
+    border: solid 1px #6c757d;
+    background-color: rgba($black, 0.7);
+    right: 0;
+    top: 100px;
+    width: 300px;
+    padding: 15px;
+    .settings-list {
+      list-style: none;
+      padding-top: 15px;
+      li {
+        padding: 10px;
+        border-bottom: solid 1px $gray-600;
+        @include flexbox;
+        &:first-child {
+          border-top: solid 1px $gray-600;
+        }
+        span {
+          flex: 1;
+        }
+        .btn {
+          background-color: $white;
+          @include border-radius(0);
+        }
+      }
+    }
+  }
+}
